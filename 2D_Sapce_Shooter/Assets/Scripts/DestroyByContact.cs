@@ -6,31 +6,28 @@ public class DestroyByContact : MonoBehaviour
 {
     public GameObject enemyExplosion;
     public GameObject playerExplosion;
-    private Spawner spawner;
-
-    private void Start()
-    {
-        GameObject temp = GameObject.FindGameObjectWithTag("Spawner");
-        if(temp != null)
-        {
-            spawner = temp.GetComponent<Spawner>();
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Boundry")
+        if(other.tag == "Finish")
         {
+            Debug.Log(other.tag);
             return;
         }
 
-        Instantiate(enemyExplosion, transform.position, transform.rotation);
         if (other.tag == "Player")
         {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-            spawner.endGame();
+            PlayerPrefs.SetInt("Score", GameManager.instance.scoreManager.score);
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
         }
-        Destroy(this.gameObject);
-        Destroy(other.gameObject);
-        spawner.updateScore();
+
+        if(other.tag == "Projectile")
+        {
+            Instantiate(enemyExplosion, transform.position, transform.rotation);
+            GameManager.instance.scoreManager.updateScore();
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }
     }
 }

@@ -11,6 +11,6 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = Vector3.forward * speed;
+        rigidbody.velocity = Vector3.up * speed;
     }
 }
