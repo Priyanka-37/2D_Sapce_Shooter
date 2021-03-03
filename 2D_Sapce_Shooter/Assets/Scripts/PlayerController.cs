@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Boundry
 {
-    public float xMin, xMax, zMin, zMax;
+    public float xMin, xMax, yMin, yMax;
 }
 
 public class PlayerController : MonoBehaviour
@@ -44,14 +44,14 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        playerMove = new Vector3(horizontal, 0.0f, vertical);
+        playerMove = new Vector3(horizontal, vertical, 0.0f);
 
         rigidbody.velocity = playerMove * speed;
 
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, boundry.xMin, boundry.xMax), 
-            0,
-            Mathf.Clamp(transform.position.z, boundry.zMin, boundry.zMax)
+            Mathf.Clamp(transform.position.y, boundry.yMin, boundry.yMax),
+            0
             );
 
         rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
