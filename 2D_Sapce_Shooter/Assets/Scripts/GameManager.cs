@@ -25,4 +25,18 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    private void Update()
+    {
+        if (GameObject.FindGameObjectWithTag("Player") == null)
+        {
+            StartCoroutine(nextScene());
+        }
+    }
+
+    IEnumerator nextScene()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
