@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DestroyByContact : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DestroyByContact : MonoBehaviour
         {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
             PlayerPrefs.SetInt("Score", GameManager.instance.scoreManager.score);
+            SceneManager.LoadScene(2);
             Destroy(this.gameObject);
             Destroy(other.gameObject);
         }
