@@ -5,19 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Button_Script : MonoBehaviour
 {
-    public void onButtonClick(int index)
+    public void loadNextScene()
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void loadScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
    
-    public void ActiveToTrue(GameObject panel1)
+    public void setActiveTrue(GameObject panel)
     {
-        panel1.SetActive(true);
+        panel.SetActive(true);
     }
 
-    public void ActiveToFalse(GameObject panel2)
+    public void SetActiveFalse(GameObject panel)
     {
-        panel2.SetActive(false);
+        panel.SetActive(false);
     }
 
     public void exitGame()
